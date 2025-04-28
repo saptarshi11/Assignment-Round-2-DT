@@ -124,24 +124,5 @@ If no suitable slot exists, the API returns a 400 error.
 
 
 
-http://localhost:8083/
-{
-  "container": {
-    "id": "C1",
-    "size": "small",
-    "needsCold": false,
-    "x": 1,
-    "y": 1
-  },
-  "yardMap": [
-    {
-      "x": 1,
-      "y": 2,
-      "sizeCap": "small",
-      "hasColdUnit": false,
-      "occupied": false
-    }
-  ]
-}
 
 
