@@ -1,0 +1,6 @@
+dev\dt\pickspot\dto\PickRequest.class
+dev\dt\pickspot\model\Slot.class
+dev\dt\pickspot\service\PickerService.class
+dev\dt\pickspot\model\Container.class
+dev\dt\pickspot\dto\PickResponse.class
+dev\dt\pickspot\PickSpotApp.class

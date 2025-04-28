@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick-a-Spot API Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pick-a-Spot API Tester</h1>
+    
+    <div class="container">
+        <h2>Test API</h2>
+        <p>Edit the JSON request below and click "Send Request" to test the API:</p>
+        <textarea id="requestBody">{
+  "container": {
+    "id": "C1",
+    "size": "small",
+    "needsCold": false,
+    "x": 1, "y": 1
+  },
+  "yardMap": [
+    {
+      "x": 1,
+      "y": 2,
+      "sizeCap": "small",
+      "hasColdUnit": false,
+      "occupied": false
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "sizeCap": "big",
+      "hasColdUnit": true,
+      "occupied": false
+    }
+  ]
+}</textarea>
+        <button id="sendRequest">Send Request</button>
+    </div>
+    
+    <div class="container">
+        <h2>Response</h2>
+        <pre id="response">Response will appear here</pre>
+    </div>
+    
+    <script>
+        document.getElementById('sendRequest').addEventListener('click', async () => {
+            try {
+                const requestBody = document.getElementById('requestBody').value;
+                
+                // Display "Loading..." while waiting for the response
+                document.getElementById('response').textContent = 'Loading...';
+                
+                const response = await fetch('http://localhost:8083/pickSpot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: requestBody
+                });
+                
+                const data = await response.json();
+                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('response').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
